@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admissions | ST PAUL'S RONGO MIXED DAY SECONDARY SCHOOL</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Color Variables */
+        :root {
+            --primary-color: #1a4b7a;
+            --secondary-color: #2a9d8f;
+            --accent-color: #e63946;
+            --light-accent: #f4a261;
+            --dark-color: #333;
+            --text-light: #777;
+            --transition: all 0.3s ease;
+        }
+
+        /* Global Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Georgia', serif;
+            margin-top: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        /* Header Styles */
+        .header {
+            position: sticky;
+            top: 0;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo a {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin: 0;
+        }
+
+        .logo h1 span {
+            color: var(--secondary-color);
+        }
+
+        .logo p {
+            font-size: 0.7rem;
+            color: var(--text-light);
+            letter-spacing: 1px;
+            margin: 0;
+        }
+
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-nav li {
+            margin-left: 25px;
+            position: relative;
+        }
+
+        .main-nav a {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--dark-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .main-nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .main-nav a i {
+            margin-left: 5px;
+            font-size: 0.7rem;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            padding: 15px 0;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            z-index: 100;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu a {
+            padding: 8px 20px;
+            display: block;
+            font-size: 0.9rem;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #f8f9fa;
+            color: var(--primary-color);
+        }
+
+        .search-icon {
+            cursor: pointer;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Colorful Admissions Page Styles */
+        .admissions-page {
+            padding: 60px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9f5ff 100%);
+        }
+
+        /* Hero Banner - More Vibrant */
+        .hero-banner {
+            background: linear-gradient(135deg, 
+                        rgba(26, 75, 122, 0.9) 0%, 
+                        rgba(42, 157, 143, 0.85) 100%), 
+                        url('../images/admissions-hero.jpg') center/cover no-repeat;
+            color: white;
+            padding: 120px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-banner::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: linear-gradient(90deg, 
+                        #e63946 0%, 
+                        #f4a261 33%, 
+                        #2a9d8f 66%, 
+                        #1a4b7a 100%);
+        }
+
+        .hero-banner h1 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-banner p {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+            opacity: 0;
+        }
+
+        /* Admissions Process - Colorful Steps */
+        .admissions-process {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .step {
+            background: white;
+            padding: 40px 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-top: 5px solid;
+        }
+
+        .step:nth-child(1) { border-color: #e63946; }
+        .step:nth-child(2) { border-color: #f4a261; }
+        .step:nth-child(3) { border-color: #2a9d8f; }
+        .step:nth-child(4) { border-color: #1a4b7a; }
+
+        .step:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .step:nth-child(1) .step-number { background: #e63946; }
+        .step:nth-child(2) .step-number { background: #f4a261; }
+        .step:nth-child(3) .step-number { background: #2a9d8f; }
+        .step:nth-child(4) .step-number { background: #1a4b7a; }
+
+        /* Requirements Section - Colorful Cards */
+        .requirements {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f0f7ff 0%, #f8f9fa 100%);
+        }
+
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+        }
+
+        .requirement-card {
+            background: white;
+            padding: 40px 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: all 0.4s ease;
+            border-bottom: 5px solid;
+        }
+
+        .requirement-card:nth-child(1) { border-color: #e63946; }
+        .requirement-card:nth-child(2) { border-color: #f4a261; }
+        .requirement-card:nth-child(3) { border-color: #2a9d8f; }
+        .requirement-card:nth-child(4) { border-color: #1a4b7a; }
+
+        .requirement-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .requirement-card i {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Important Dates - Colorful Timeline */
+        .important-dates {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .dates-timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            position: relative;
+            max-width: 1000px;
+            margin: 40px auto 0;
+        }
+
+        .dates-timeline::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, 
+                        #e63946 0%, 
+                        #f4a261 33%, 
+                        #2a9d8f 66%, 
+                        #1a4b7a 100%);
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+
+        .date-item {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            transition: all 0.4s ease;
+        }
+
+        .date-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .date-item::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            z-index: 3;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .date-item:nth-child(1)::before { background: #e63946; }
+        .date-item:nth-child(2)::before { background: #f4a261; }
+        .date-item:nth-child(3)::before { background: #2a9d8f; }
+        .date-item:nth-child(4)::before { background: #1a4b7a; }
+
+        /* CTA Section - Colorful Gradient */
+        .admissions-page .cta-section {
+            background: linear-gradient(135deg, #1a4b7a 0%, #2a9d8f 100%);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .admissions-page .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: linear-gradient(90deg, 
+                        #e63946 0%, 
+                        #f4a261 33%, 
+                        #2a9d8f 66%, 
+                        #1a4b7a 100%);
+        }
+
+        .admissions-page .cta-section h2 {
+            color: white;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .admissions-page .cta-section .btn {
+            margin: 0 15px;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .admissions-page .cta-section .btn-primary {
+            background: white;
+            color: var(--primary-color);
+            border: 2px solid white;
+        }
+
+        .admissions-page .cta-section .btn-primary:hover {
+            background: transparent;
+            color: white;
+        }
+
+        .admissions-page .cta-section .btn-secondary {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border: 2px solid white;
+        }
+
+        .admissions-page .cta-section .btn-secondary:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 50px 0 20px;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--secondary-color);
+        }
+        
+        .footer-column p, .footer-column a {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-column a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero-banner h1 {
+                font-size: 2.8rem;
+            }
+            
+            .process-steps, 
+            .requirements-grid,
+            .dates-timeline {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .dates-timeline::before {
+                display: none;
+            }
+            
+            .date-item::before {
+                top: -10px;
+                transform: translateX(-50%);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-banner {
+                padding: 90px 0;
+            }
+            
+            .hero-banner h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-banner p {
+                font-size: 1.2rem;
+            }
+            
+            .process-steps, 
+            .requirements-grid,
+            .dates-timeline {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .admissions-page .cta-section .btn {
+                display: block;
+                width: 80%;
+                margin: 15px auto;
+            }
+
+            .main-nav {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-banner {
+                padding: 70px 0;
+            }
+            
+            .hero-banner h1 {
+                font-size: 2rem;
+            }
+            
+            .step, 
+            .requirement-card,
+            .date-item {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <h1>ST PAUL'S RONGO <span>MIXED DAY SECONDARY SCHOOL</span></h1>
+                </a>
+            </div>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    
+                    <li class="dropdown">
+                        <a href="about.html">About <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="leadership.html">Leadership</a>
+                        </div>
+                    </li>
+                    
+                    <li class="dropdown">
+                        <a href="academics.html">Academics <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="departments.html">Departments</a>
+                        </div>
+                    </li>
+                    
+                    <li><a href="admissions.html">Admissions</a></li>
+                    <li><a href="pictorials.html">Student Life</a></li>
+                    
+                    <li class="dropdown">
+                        <a href="athletics.html">Athletics <i class="fas fa-chevron-down"></i></a>
+                    </li>
+                    
+                    <li class="dropdown">
+                        <a href="news.html">News <i class="fas fa-chevron-down"></i></a>
+                    </li>
+                    
+                    <li><a href="contact.html">Contact</a></li>
+                    
+                    <li class="search-icon"><i class="fas fa-search"></i></li>
+                </ul>
+            </nav>
+            
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="admissions-page">
+        <section class="hero-banner">
+            <div class="container">
+                <h1>Admissions at ST PAUL'S RONGO MIXED DAY SECONDARY SCHOOL</h1>
+                <p>Join our community of excellence and discover your potential</p>
+            </div>
+        </section>
+
+        <section class="admissions-process">
+            <div class="container">
+                <h2>Our Admissions Process</h2>
+                <p class="section-intro">We make the application process simple and straightforward. Follow these steps to join our school community.</p>
+                <div class="process-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Inquiry</h3>
+                        <p>Submit an inquiry form to begin the process and receive our information package</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>School Tour</h3>
+                        <p>Schedule a campus visit to experience our facilities and meet our staff</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>Application</h3>
+                        <p>Complete the application package with all required documents</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h3>Admission</h3>
+                        <p>Receive your admissions decision and enrollment information</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="requirements">
+            <div class="container">
+                <h2>Admissions Requirements</h2>
+                <p class="section-intro">To ensure a smooth application process, please prepare the following documents:</p>
+                <div class="requirements-grid">
+                    <div class="requirement-card">
+                        <i class="fas fa-file-alt"></i>
+                        <h3>Application Form</h3>
+                        <p>Dully filled application form with recent passport photo</p>
+                    </div>
+                    <div class="requirement-card">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Academic Records</h3>
+                        <p>Certified copies of previous school reports and KCPE results</p>
+                    </div>
+                    <div class="requirement-card">
+                        <i class="fas fa-pencil-alt"></i>
+                        <h3>Entrance Exam</h3>
+                        <p>Completed entrance examination (for Form 1 applicants)</p>
+                    </div>
+                    <div class="requirement-card">
+                        <i class="fas fa-users"></i>
+                        <h3>Parent Meeting</h3>
+                        <p>Interview with parents/guardians and student</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="important-dates">
+            <div class="container">
+                <h2>Important Dates & Deadlines</h2>
+                <p class="section-intro">Mark your calendar with these key dates for the 2025 admissions cycle:</p>
+                <div class="dates-timeline">
+                    <div class="date-item">
+                        <h3>January 15</h3>
+                        <p>Admissions open for Form 1</p>
+                    </div>
+                    <div class="date-item">
+                        <h3>March 1</h3>
+                        <p>Entrance examinations</p>
+                    </div>
+                    <div class="date-item">
+                        <h3>April 15</h3>
+                        <p>Application deadline</p>
+                    </div>
+                    <div class="date-item">
+                        <h3>May 30</h3>
+                        <p>Admission letters released</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <h2>Ready to Begin Your Journey With Us?</h2>
+                <a href="apply.html" class="btn btn-primary">Start Your Application</a>
+                <a href="contact.html" class="btn btn-secondary">Schedule a School Tour</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About Our School</h3>
+                    <p>St. Paul's Rongo Mixed Day Secondary School is committed to academic excellence, character development, and holistic education for all students.</p>
+                    <div class="social-links">
+        <a href="https://www.facebook.com/StPaulsRongo" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://twitter.com/StPaulRongo" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.instagram.com/rongo_mixed_secondary_school" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.youtube.com/@StpaulrongoMixeddaysecondary" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="https://wa.me/254712345678" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="academics.html">Academics</a>
+                    <a href="admissions.html">Admissions</a>
+                    <a href="contact.html">Contact Us</a>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Rongo Town, Migori County, Kenya</p>
+                    <p><i class="fas fa-phone"></i> +254 712 345 678</p>
+                    <p><i class="fas fa-envelope"></i> stpaulrongomixeddaysecondary@gmail.com</p>
+                    <p><i class="fas fa-clock"></i> Mon-Fri: 8:00 AM - 5:00 PM</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 St. Paul's Rongo Mixed Day Secondary School. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle functionality
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.main-nav').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
