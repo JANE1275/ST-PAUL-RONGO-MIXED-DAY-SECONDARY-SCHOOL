@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admissions | ST PAUL'S RONGO MIXED DAY SECONDARY SCHOOL</title>
+    <title>Admissions | ST PAUL'S RONGO MIXED  SECONDARY SCHOOL</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         /* Color Variables */
         :root {
@@ -15,15 +16,18 @@
             --dark-color: #333;
             --text-light: #777;
             --transition: all 0.3s ease;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
         }
 
         /* Global Styles */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #333;
+            color: var(--dark-color);
             margin: 0;
             padding: 0;
+            overflow-x: hidden;
         }
 
         .container {
@@ -36,32 +40,91 @@
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Georgia', serif;
             margin-top: 0;
+            color: var(--primary-color);
         }
 
         a {
             text-decoration: none;
             color: inherit;
+            transition: var(--transition);
         }
 
         .btn {
             display: inline-block;
             padding: 12px 25px;
-            border-radius: 5px;
+            border-radius: 50px;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
             font-size: 0.9rem;
             transition: var(--transition);
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .section-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: var(--text-light);
+            font-size: 1.1rem;
         }
 
         /* Header Styles */
         .header {
             position: sticky;
             top: 0;
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.98);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             z-index: 1000;
             padding: 15px 0;
+            transition: var(--transition);
+        }
+
+        .header.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
         }
 
         .header .container {
@@ -79,6 +142,7 @@
             font-size: 1.8rem;
             color: var(--primary-color);
             margin: 0;
+            font-weight: 700;
         }
 
         .logo h1 span {
@@ -110,6 +174,23 @@
             color: var(--dark-color);
             display: flex;
             align-items: center;
+            padding: 8px 0;
+            position: relative;
+        }
+
+        .main-nav a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .main-nav a:hover:after {
+            width: 100%;
         }
 
         .main-nav a:hover {
@@ -126,10 +207,10 @@
             top: 100%;
             left: 0;
             background-color: white;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            border-radius: 5px;
+            box-shadow: var(--box-shadow);
+            border-radius: var(--border-radius);
             padding: 15px 0;
-            min-width: 200px;
+            min-width: 220px;
             opacity: 0;
             visibility: hidden;
             transform: translateY(10px);
@@ -144,43 +225,42 @@
         }
 
         .dropdown-menu a {
-            padding: 8px 20px;
+            padding: 10px 20px;
             display: block;
             font-size: 0.9rem;
         }
 
         .dropdown-menu a:hover {
-            background-color: #f8f9fa;
+            background-color: rgba(26, 75, 122, 0.05);
             color: var(--primary-color);
+            padding-left: 25px;
         }
 
         .search-icon {
             cursor: pointer;
+            font-size: 1.1rem;
         }
 
         .mobile-menu-btn {
             display: none;
             font-size: 1.5rem;
             cursor: pointer;
+            color: var(--primary-color);
         }
 
-        /* Colorful Admissions Page Styles */
-        .admissions-page {
-            padding: 60px 0;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9f5ff 100%);
-        }
-
-        /* Hero Banner - More Vibrant */
+        /* Hero Banner */
         .hero-banner {
             background: linear-gradient(135deg, 
                         rgba(26, 75, 122, 0.9) 0%, 
                         rgba(42, 157, 143, 0.85) 100%), 
                         url('../images/admissions-hero.jpg') center/cover no-repeat;
             color: white;
-            padding: 120px 0;
+            padding: 150px 0;
             text-align: center;
             position: relative;
             overflow: hidden;
+            margin-top: -80px;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
         }
 
         .hero-banner::after {
@@ -191,10 +271,10 @@
             right: 0;
             height: 10px;
             background: linear-gradient(90deg, 
-                        #e63946 0%, 
-                        #f4a261 33%, 
-                        #2a9d8f 66%, 
-                        #1a4b7a 100%);
+                        var(--accent-color) 0%, 
+                        var(--light-accent) 33%, 
+                        var(--secondary-color) 66%, 
+                        var(--primary-color) 100%);
         }
 
         .hero-banner h1 {
@@ -202,27 +282,28 @@
             margin-bottom: 20px;
             color: white;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-            animation: fadeInUp 0.8s ease;
         }
 
         .hero-banner p {
             font-size: 1.5rem;
             opacity: 0.9;
             max-width: 700px;
-            margin: 0 auto;
-            animation: fadeInUp 0.8s ease 0.2s forwards;
-            opacity: 0;
+            margin: 0 auto 30px;
         }
 
-        /* Admissions Process - Colorful Steps */
+        .hero-banner .btn {
+            margin: 0 10px;
+        }
+
+        /* Admissions Process */
         .admissions-process {
-            padding: 80px 0;
+            padding: 100px 0;
             background: white;
         }
 
         .process-steps {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
             margin-top: 40px;
         }
@@ -230,22 +311,44 @@
         .step {
             background: white;
             padding: 40px 25px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
             text-align: center;
             position: relative;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: var(--transition);
             border-top: 5px solid;
+            z-index: 1;
         }
 
-        .step:nth-child(1) { border-color: #e63946; }
-        .step:nth-child(2) { border-color: #f4a261; }
-        .step:nth-child(3) { border-color: #2a9d8f; }
-        .step:nth-child(4) { border-color: #1a4b7a; }
+        .step:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            transition: var(--transition);
+            z-index: -1;
+            border-radius: var(--border-radius);
+        }
+
+        .step:hover:before {
+            height: 100%;
+        }
+
+        .step:nth-child(1) { border-color: var(--accent-color); }
+        .step:nth-child(2) { border-color: var(--light-accent); }
+        .step:nth-child(3) { border-color: var(--secondary-color); }
+        .step:nth-child(4) { border-color: var(--primary-color); }
 
         .step:hover {
-            transform: translateY(-15px) scale(1.03);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            transform: translateY(-10px);
+            color: white;
+        }
+
+        .step:hover h3 {
+            color: white;
         }
 
         .step-number {
@@ -265,41 +368,40 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
-        .step:nth-child(1) .step-number { background: #e63946; }
-        .step:nth-child(2) .step-number { background: #f4a261; }
-        .step:nth-child(3) .step-number { background: #2a9d8f; }
-        .step:nth-child(4) .step-number { background: #1a4b7a; }
+        .step:nth-child(1) .step-number { background: var(--accent-color); }
+        .step:nth-child(2) .step-number { background: var(--light-accent); }
+        .step:nth-child(3) .step-number { background: var(--secondary-color); }
+        .step:nth-child(4) .step-number { background: var(--primary-color); }
 
-        /* Requirements Section - Colorful Cards */
+        /* Requirements Section */
         .requirements {
-            padding: 80px 0;
+            padding: 100px 0;
             background: linear-gradient(135deg, #f0f7ff 0%, #f8f9fa 100%);
         }
 
         .requirements-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
         }
 
         .requirement-card {
             background: white;
             padding: 40px 25px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
             text-align: center;
-            transition: all 0.4s ease;
+            transition: var(--transition);
             border-bottom: 5px solid;
         }
 
-        .requirement-card:nth-child(1) { border-color: #e63946; }
-        .requirement-card:nth-child(2) { border-color: #f4a261; }
-        .requirement-card:nth-child(3) { border-color: #2a9d8f; }
-        .requirement-card:nth-child(4) { border-color: #1a4b7a; }
+        .requirement-card:nth-child(1) { border-color: var(--accent-color); }
+        .requirement-card:nth-child(2) { border-color: var(--light-accent); }
+        .requirement-card:nth-child(3) { border-color: var(--secondary-color); }
+        .requirement-card:nth-child(4) { border-color: var(--primary-color); }
 
         .requirement-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
 
         .requirement-card i {
@@ -311,15 +413,15 @@
             color: transparent;
         }
 
-        /* Important Dates - Colorful Timeline */
+        /* Important Dates */
         .important-dates {
-            padding: 80px 0;
+            padding: 100px 0;
             background: white;
         }
 
         .dates-timeline {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 40px;
             position: relative;
             max-width: 1000px;
@@ -334,10 +436,10 @@
             right: 0;
             height: 4px;
             background: linear-gradient(90deg, 
-                        #e63946 0%, 
-                        #f4a261 33%, 
-                        #2a9d8f 66%, 
-                        #1a4b7a 100%);
+                        var(--accent-color) 0%, 
+                        var(--light-accent) 33%, 
+                        var(--secondary-color) 66%, 
+                        var(--primary-color) 100%);
             transform: translateY(-50%);
             z-index: 1;
         }
@@ -345,17 +447,16 @@
         .date-item {
             background: white;
             padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
             text-align: center;
             position: relative;
             z-index: 2;
-            transition: all 0.4s ease;
+            transition: var(--transition);
         }
 
         .date-item:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
 
         .date-item::before {
@@ -371,22 +472,250 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
 
-        .date-item:nth-child(1)::before { background: #e63946; }
-        .date-item:nth-child(2)::before { background: #f4a261; }
-        .date-item:nth-child(3)::before { background: #2a9d8f; }
-        .date-item:nth-child(4)::before { background: #1a4b7a; }
+        .date-item:nth-child(1)::before { background: var(--accent-color); }
+        .date-item:nth-child(2)::before { background: var(--light-accent); }
+        .date-item:nth-child(3)::before { background: var(--secondary-color); }
+        .date-item:nth-child(4)::before { background: var(--primary-color); }
 
-        /* CTA Section - Colorful Gradient */
-        .admissions-page .cta-section {
-            background: linear-gradient(135deg, #1a4b7a 0%, #2a9d8f 100%);
+        /* Download Forms Section */
+        .download-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f0f7ff 0%, #f8f9fa 100%);
+        }
+
+        .download-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .download-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            transition: var(--transition);
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .download-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .download-card i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .download-card .btn {
+            margin-top: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Admission Letters Portal */
+        .letter-portal {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .letter-search {
+            max-width: 800px;
+            margin: 40px auto 0;
+            background: #f9f9f9;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .search-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .search-box input {
+            padding: 15px;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        #searchLetter {
+            grid-column: span 2;
+            padding: 15px;
+            font-size: 1.1rem;
+        }
+
+        .letter-result {
+            padding: 30px;
+            border-radius: var(--border-radius);
+            background: rgba(42, 157, 143, 0.1);
+            margin-top: 20px;
+            display: none;
+            text-align: center;
+        }
+
+        .letter-result.active {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .letter-result h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .letter-result p {
+            margin-bottom: 15px;
+        }
+
+        .download-letter-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--secondary-color);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            margin: 10px;
+        }
+
+        .download-letter-btn:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .letter-help {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        .letter-help a {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Online Application Section */
+        .online-application {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9f5ff 100%);
+        }
+        
+        .application-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .app-step {
+            text-align: center;
+            padding: 40px 25px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+        
+        .app-step:hover {
+            transform: translateY(-10px);
+        }
+        
+        .step-circle {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 20px;
+            transition: var(--transition);
+        }
+        
+        .app-step:hover .step-circle {
+            transform: scale(1.1);
+            background: var(--secondary-color);
+        }
+        
+        .application-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        
+        .btn-large {
+            padding: 15px 35px;
+            font-size: 1.1rem;
+            min-width: 250px;
+        }
+        
+        .application-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 40px 25px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-card i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+        
+        .feature-card:hover i {
+            transform: scale(1.2);
+            color: var(--secondary-color);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             color: white;
             padding: 100px 0;
             text-align: center;
             position: relative;
             overflow: hidden;
+            clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%);
         }
 
-        .admissions-page .cta-section::before {
+        .cta-section::before {
             content: '';
             position: absolute;
             top: 0;
@@ -394,49 +723,141 @@
             right: 0;
             height: 10px;
             background: linear-gradient(90deg, 
-                        #e63946 0%, 
-                        #f4a261 33%, 
-                        #2a9d8f 66%, 
-                        #1a4b7a 100%);
+                        var(--accent-color) 0%, 
+                        var(--light-accent) 33%, 
+                        var(--secondary-color) 66%, 
+                        var(--primary-color) 100%);
         }
 
-        .admissions-page .cta-section h2 {
+        .cta-section h2 {
             color: white;
             margin-bottom: 30px;
             font-size: 2.5rem;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
         }
 
-        .admissions-page .cta-section .btn {
+        .cta-section .btn {
             margin: 0 15px;
             padding: 15px 30px;
             font-size: 1.1rem;
             border-radius: 50px;
             font-weight: 700;
             letter-spacing: 0.5px;
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
 
-        .admissions-page .cta-section .btn-primary {
+        .cta-section .btn-primary {
             background: white;
             color: var(--primary-color);
             border: 2px solid white;
         }
 
-        .admissions-page .cta-section .btn-primary:hover {
+        .cta-section .btn-primary:hover {
             background: transparent;
             color: white;
         }
 
-        .admissions-page .cta-section .btn-secondary {
+        .cta-section .btn-secondary {
             background: rgba(255,255,255,0.15);
             color: white;
             border: 2px solid white;
         }
 
-        .admissions-page .cta-section .btn-secondary:hover {
+        .cta-section .btn-secondary:hover {
             background: white;
             color: var(--primary-color);
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 80px 0 20px;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: linear-gradient(90deg, 
+                        var(--accent-color) 0%, 
+                        var(--light-accent) 33%, 
+                        var(--secondary-color) 66%, 
+                        var(--primary-color) 100%);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--secondary-color);
+        }
+        
+        .footer-column p, .footer-column a {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 12px;
+            display: block;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-column a:hover {
+            color: white;
+            padding-left: 8px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .social-links a {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            font-size: 1.1rem;
+        }
+        
+        .social-links a:hover {
+            background: var(--secondary-color);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
         }
 
         /* Animations */
@@ -451,83 +872,6 @@
             }
         }
 
-        /* Footer Styles */
-        footer {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 50px 0 20px;
-            margin-top: 60px;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-        
-        .footer-column h3 {
-            color: white;
-            margin-bottom: 20px;
-            font-size: 1.2rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        
-        .footer-column h3:after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 40px;
-            height: 2px;
-            background: var(--secondary-color);
-        }
-        
-        .footer-column p, .footer-column a {
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 10px;
-            display: block;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-        
-        .footer-column a:hover {
-            color: white;
-            padding-left: 5px;
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .social-links a {
-            color: white;
-            background: rgba(255, 255, 255, 0.1);
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-        }
-        
-        .social-links a:hover {
-            background: var(--secondary-color);
-            transform: translateY(-3px);
-        }
-        
-        .copyright {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.9rem;
-        }
-
         /* Responsive Styles */
         @media (max-width: 992px) {
             .hero-banner h1 {
@@ -536,7 +880,8 @@
             
             .process-steps, 
             .requirements-grid,
-            .dates-timeline {
+            .dates-timeline,
+            .download-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
             
@@ -552,7 +897,8 @@
 
         @media (max-width: 768px) {
             .hero-banner {
-                padding: 90px 0;
+                padding: 120px 0;
+                clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
             }
             
             .hero-banner h1 {
@@ -565,29 +911,80 @@
             
             .process-steps, 
             .requirements-grid,
-            .dates-timeline {
+            .dates-timeline,
+            .download-grid,
+            .application-steps,
+            .application-features {
                 grid-template-columns: 1fr;
                 gap: 40px;
             }
             
-            .admissions-page .cta-section .btn {
+            .cta-section .btn {
                 display: block;
-                width: 80%;
+                width: 100%;
+                max-width: 300px;
                 margin: 15px auto;
             }
 
+            .search-box {
+                grid-template-columns: 1fr;
+            }
+            
+            #searchLetter {
+                grid-column: span 1;
+            }
+
             .main-nav {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background: white;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
                 display: none;
+                z-index: 999;
+            }
+
+            .main-nav.active {
+                display: block;
+                animation: fadeInDown 0.5s ease;
+            }
+
+            .main-nav ul {
+                flex-direction: column;
+            }
+
+            .main-nav li {
+                margin: 0 0 15px 0;
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                padding: 10px 0 0 20px;
+                display: none;
+            }
+
+            .dropdown:hover .dropdown-menu {
+                display: block;
             }
 
             .mobile-menu-btn {
                 display: block;
             }
+
+            .header {
+                padding: 10px 0;
+            }
         }
 
         @media (max-width: 576px) {
             .hero-banner {
-                padding: 70px 0;
+                padding: 100px 0;
             }
             
             .hero-banner h1 {
@@ -596,58 +993,55 @@
             
             .step, 
             .requirement-card,
-            .date-item {
+            .date-item,
+            .download-card,
+            .app-step,
+            .feature-card {
                 padding: 30px 20px;
+            }
+
+            .application-actions {
+                flex-direction: column;
+            }
+
+            .btn-large {
+                width: 100%;
             }
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <header class="header">
+    <header class="header" id="header">
         <div class="container">
             <div class="logo">
                 <a href="index.html">
-                    <h1>ST PAUL'S RONGO <span>MIXED DAY SECONDARY SCHOOL</span></h1>
+                    <h1>ST PAUL'S RONGO <span>MIXED  SECONDARY SCHOOL</span></h1>
                 </a>
             </div>
             
-            <nav class="main-nav">
+            <nav class="main-nav" id="mainNav">
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     
-                    <li class="dropdown">
-                        <a href="about.html">About <i class="fas fa-chevron-down"></i></a>
-                        <div class="dropdown-menu">
-                            <a href="leadership.html">Leadership</a>
-                        </div>
-                    </li>
+                    <li class="active"><a href="about.html">About</a></i>       
+                
+                    <li class="active"><a href="leadership.html">Leadership</a></li>
+                    <li class="active"><a href="academics.html">Academics ></a></i>    
+                    <li class="active><a href="departments.html">Departments</a></li>
+                    <li class="active"><a href="admissions.html">Admissions</a></li>
+                    <li class="active"><a href="student-life.html">Student Life</a></li>
+                    <li class="active"><a href="athletics.html">Athletics <i class="fas fa-chevron-down"></a></i>
                     
-                    <li class="dropdown">
-                        <a href="academics.html">Academics <i class="fas fa-chevron-down"></i></a>
-                        <div class="dropdown-menu">
-                            <a href="departments.html">Departments</a>
-                        </div>
-                    </li>
+                    <li class="active"><a href="news.html">News <i class="fas fa-chevron-down"></a></i>
                     
-                    <li><a href="admissions.html">Admissions</a></li>
-                    <li><a href="pictorials.html">Student Life</a></li>
-                    
-                    <li class="dropdown">
-                        <a href="athletics.html">Athletics <i class="fas fa-chevron-down"></i></a>
-                    </li>
-                    
-                    <li class="dropdown">
-                        <a href="news.html">News <i class="fas fa-chevron-down"></i></a>
-                    </li>
-                    
-                    <li><a href="contact.html">Contact</a></li>
+                    <li class="active"><a href="contact.html">Contact</a></li>
                     
                     <li class="search-icon"><i class="fas fa-search"></i></li>
                 </ul>
             </nav>
             
-            <div class="mobile-menu-btn">
+            <div class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
             </div>
         </div>
@@ -656,32 +1050,36 @@
     <main class="admissions-page">
         <section class="hero-banner">
             <div class="container">
-                <h1>Admissions at ST PAUL'S RONGO MIXED DAY SECONDARY SCHOOL</h1>
-                <p>Join our community of excellence and discover your potential</p>
+                <h1 class="animate__animated animate__fadeInDown">Admissions at ST PAUL'S RONGO</h1>
+                <p class="animate__animated animate__fadeInUp animate__delay-1s">Join our community of excellence and discover your potential</p>
+                <div class="animate__animated animate__fadeInUp animate__delay-2s">
+                    <a href="#online-application" class="btn btn-primary">Apply Online</a>
+                    <a href="#requirements" class="btn btn-secondary">View Requirements</a>
+                </div>
             </div>
         </section>
 
         <section class="admissions-process">
             <div class="container">
-                <h2>Our Admissions Process</h2>
+                <h2 class="section-title">Our Admissions Process</h2>
                 <p class="section-intro">We make the application process simple and straightforward. Follow these steps to join our school community.</p>
                 <div class="process-steps">
-                    <div class="step">
+                    <div class="step animate__animated animate__fadeInUp">
                         <div class="step-number">1</div>
                         <h3>Inquiry</h3>
                         <p>Submit an inquiry form to begin the process and receive our information package</p>
                     </div>
-                    <div class="step">
+                    <div class="step animate__animated animate__fadeInUp animate__delay-1s">
                         <div class="step-number">2</div>
                         <h3>School Tour</h3>
                         <p>Schedule a campus visit to experience our facilities and meet our staff</p>
                     </div>
-                    <div class="step">
+                    <div class="step animate__animated animate__fadeInUp animate__delay-2s">
                         <div class="step-number">3</div>
                         <h3>Application</h3>
                         <p>Complete the application package with all required documents</p>
                     </div>
-                    <div class="step">
+                    <div class="step animate__animated animate__fadeInUp animate__delay-3s">
                         <div class="step-number">4</div>
                         <h3>Admission</h3>
                         <p>Receive your admissions decision and enrollment information</p>
@@ -690,9 +1088,9 @@
             </div>
         </section>
 
-        <section class="requirements">
+        <section class="requirements" id="requirements">
             <div class="container">
-                <h2>Admissions Requirements</h2>
+                <h2 class="section-title">Admissions Requirements</h2>
                 <p class="section-intro">To ensure a smooth application process, please prepare the following documents:</p>
                 <div class="requirements-grid">
                     <div class="requirement-card">
@@ -721,24 +1119,118 @@
 
         <section class="important-dates">
             <div class="container">
-                <h2>Important Dates & Deadlines</h2>
+                <h2 class="section-title">Important Dates & Deadlines</h2>
                 <p class="section-intro">Mark your calendar with these key dates for the 2025 admissions cycle:</p>
                 <div class="dates-timeline">
                     <div class="date-item">
                         <h3>January 15</h3>
                         <p>Admissions open for Form 1</p>
+                        <p class="date-note">Applications begin</p>
                     </div>
                     <div class="date-item">
                         <h3>March 1</h3>
                         <p>Entrance examinations</p>
+                        <p class="date-note">All applicants</p>
                     </div>
                     <div class="date-item">
                         <h3>April 15</h3>
                         <p>Application deadline</p>
+                        <p class="date-note">Final submissions</p>
                     </div>
                     <div class="date-item">
                         <h3>May 30</h3>
                         <p>Admission letters released</p>
+                        <p class="date-note">Check portal</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Downloadable Application Form Section -->
+        <section class="download-section">
+            <div class="container">
+                <h2 class="section-title">Download Application Forms</h2>
+                <p class="section-intro">Get all the necessary forms to begin your application process:</p>
+                <div class="download-grid">
+                    <div class="download-card">
+                        <i class="fas fa-file-pdf"></i>
+                        <h3>Application Form</h3>
+                        <p>Complete this form to apply for admission</p>
+                        <a href="downloads/application-form.pdf" class="btn btn-primary" download="StPauls_Application_Form.pdf">
+                            <i class="fas fa-download"></i> Download Form
+                        </a>
+                    </div>
+                    <div class="download-card">
+                        <i class="fas fa-file-word"></i>
+                        <h3>Medical Form</h3>
+                        <p>Required health information form</p>
+                        <a href="downloads/medical-form.docx" class="btn btn-primary" download="StPauls_Medical_Form.docx">
+                            <i class="fas fa-download"></i> Download Form
+                        </a>
+                    </div>
+                    <div class="download-card">
+                        <i class="fas fa-file-excel"></i>
+                        <h3>Fee Structure</h3>
+                        <p>Current school fee breakdown</p>
+                        <a href="downloads/fee-structure.xlsx" class="btn btn-primary" download="StPauls_Fee_Structure.xlsx">
+                            <i class="fas fa-download"></i> Download
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Admission Letters Portal Section -->
+        
+
+        <!-- Online Application Section -->
+        <section class="online-application" id="online-application">
+            <div class="container">
+                <h2 class="section-title">Online Application Portal</h2>
+                <p class="section-intro">Complete your application online through our secure portal:</p>
+                
+                <div class="application-steps">
+                    
+                    <div class="app-step">
+                        <div class="step-circle">2</div>
+                        <h3>Fill Application</h3>
+                        <p>Complete the online application form</p>
+                    </div>
+                    <div class="app-step">
+                        <div class="step-circle">3</div>
+                        <h3>Submit Documents</h3>
+                        <p>Submit required documents to the school</p>
+                    </div>
+                    
+                </div>
+                
+                <div class="application-actions">
+                    <a href="register.html" class="btn btn-primary btn-large">
+                        <i class="fas fa-user-plus"></i> Start New Application
+                    </a>
+                    
+                </div>
+                
+                <div class="application-features">
+                    <div class="feature-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h4>Secure Submission</h4>
+                        <p>256-bit encryption protects your data</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h4>Mobile Friendly</h4>
+                        <p>Complete your application on any device</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-save"></i>
+                        <h4>Save Progress</h4>
+                        <p>Your work is saved automatically</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-headset"></i>
+                        <h4>Live Support</h4>
+                        <p>Get help from our admissions team</p>
                     </div>
                 </div>
             </div>
@@ -747,7 +1239,7 @@
         <section class="cta-section">
             <div class="container">
                 <h2>Ready to Begin Your Journey With Us?</h2>
-                <a href="apply.html" class="btn btn-primary">Start Your Application</a>
+                <a href="register.html" class="btn btn-primary">Start Your Application</a>
                 <a href="contact.html" class="btn btn-secondary">Schedule a School Tour</a>
             </div>
         </section>
@@ -759,14 +1251,14 @@
             <div class="footer-content">
                 <div class="footer-column">
                     <h3>About Our School</h3>
-                    <p>St. Paul's Rongo Mixed Day Secondary School is committed to academic excellence, character development, and holistic education for all students.</p>
+                    <p>St. Paul's Rongo Mixed  Secondary School is committed to academic excellence, character development, and holistic education for all students.</p>
                     <div class="social-links">
-        <a href="https://www.facebook.com/StPaulsRongo" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://twitter.com/StPaulRongo" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
-        <a href="https://www.instagram.com/rongo_mixed_secondary_school" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.youtube.com/@StpaulrongoMixeddaysecondary" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
-        <a href="https://wa.me/254712345678" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-    </div>
+                        <a href="https://www.facebook.com/StPaulsRongo" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://twitter.com/StPaulRongo" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/rongo_mixed_secondary_school" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@StpaulrongoMixeddaysecondary" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://wa.me/254712345678" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
                 </div>
                 
                 <div class="footer-column">
@@ -775,6 +1267,7 @@
                     <a href="about.html">About Us</a>
                     <a href="academics.html">Academics</a>
                     <a href="admissions.html">Admissions</a>
+                    <a href="student-life.html">Student Life</a>
                     <a href="contact.html">Contact Us</a>
                 </div>
                 
@@ -782,7 +1275,7 @@
                     <h3>Contact Info</h3>
                     <p><i class="fas fa-map-marker-alt"></i> Rongo Town, Migori County, Kenya</p>
                     <p><i class="fas fa-phone"></i> +254 712 345 678</p>
-                    <p><i class="fas fa-envelope"></i> stpaulrongomixeddaysecondary@gmail.com</p>
+                    <p><i class="fas fa-envelope"></i> admissions@stpaulsrongo.edu</p>
                     <p><i class="fas fa-clock"></i> Mon-Fri: 8:00 AM - 5:00 PM</p>
                 </div>
             </div>
@@ -795,8 +1288,190 @@
 
     <script>
         // Mobile menu toggle functionality
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-            document.querySelector('.main-nav').classList.toggle('active');
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+            this.querySelector('i').classList.toggle('fa-bars');
+            this.querySelector('i').classList.toggle('fa-times');
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Admission Letter Search Functionality
+        document.getElementById('searchLetter').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const appNumber = document.getElementById('applicationNumber').value.trim();
+            const studentName = document.getElementById('studentName').value.trim();
+            const resultDiv = document.getElementById('letterResult');
+            
+            // Validate inputs
+            if (!appNumber || !studentName) {
+                resultDiv.innerHTML = '<div class="alert-message"><i class="fas fa-exclamation-circle"></i> Please enter both your application number and full name.</div>';
+                resultDiv.classList.add('active');
+                return;
+            }
+            
+            // Show loading state
+            resultDiv.innerHTML = '<div class="loading-state"><i class="fas fa-spinner fa-spin"></i> Searching for your admission letter...</div>';
+            resultDiv.classList.add('active');
+            
+            // Simulate API call with timeout
+            setTimeout(() => {
+                // This would be replaced with actual API call in production
+                const applications = [
+                    {
+                        appNumber: "SPR-2025-001",
+                        name: "John Doe",
+                        status: "Admitted",
+                        form: "1 West",
+                        date: "January 10, 2025"
+                    },
+                    {
+                        appNumber: "SPR-2025-002",
+                        name: "Jane Smith",
+                        status: "Pending",
+                        form: "",
+                        date: ""
+                    }
+                ];
+                
+                const foundApp = applications.find(app => 
+                    app.appNumber === appNumber && 
+                    app.name.toLowerCase().includes(studentName.toLowerCase())
+                );
+                
+                if (foundApp) {
+                    if (foundApp.status === "Admitted") {
+                        resultDiv.innerHTML = `
+                            <div class="success-message">
+                                <h3><i class="fas fa-check-circle"></i> Admission Letter Found</h3>
+                                <div class="result-details">
+                                    <p><strong>Application Number:</strong> ${foundApp.appNumber}</p>
+                                    <p><strong>Student Name:</strong> ${foundApp.name}</p>
+                                    <p><strong>Status:</strong> <span class="status-admitted">${foundApp.status}</span></p>
+                                    <p><strong>Form:</strong> ${foundApp.form}</p>
+                                    <p><strong>Reporting Date:</strong> ${foundApp.date}</p>
+                                </div>
+                                <div class="action-buttons">
+                                    <a href="downloads/admission-letters/sample-letter.pdf" class="download-letter-btn" download="StPauls_Admission_Letter_${foundApp.appNumber}.pdf">
+                                        <i class="fas fa-download"></i> Download Letter
+                                    </a>
+                                    <button id="emailLetter" class="download-letter-btn email-btn">
+                                        <i class="fas fa-envelope"></i> Email to Me
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        
+                        // Email button functionality
+                        document.getElementById('emailLetter').addEventListener('click', function() {
+                            alert(`Admission letter for ${foundApp.name} would be sent to the email on file.`);
+                        });
+                    } else {
+                        resultDiv.innerHTML = `
+                            <div class="info-message">
+                                <h3><i class="fas fa-info-circle"></i> Application Status</h3>
+                                <div class="result-details">
+                                    <p><strong>Application Number:</strong> ${foundApp.appNumber}</p>
+                                    <p><strong>Student Name:</strong> ${foundApp.name}</p>
+                                    <p><strong>Status:</strong> <span class="status-pending">${foundApp.status}</span></p>
+                                    <p>Your application is still under review. Please check back later.</p>
+                                </div>
+                            </div>
+                        `;
+                    }
+                } else {
+                    resultDiv.innerHTML = `
+                        <div class="error-message">
+                            <h3><i class="fas fa-exclamation-triangle"></i> Letter Not Found</h3>
+                            <div class="result-details">
+                                <p>We couldn't find an admission letter matching:</p>
+                                <p><strong>Application Number:</strong> ${appNumber}</p>
+                                <p><strong>Student Name:</strong> ${studentName}</p>
+                                <p>Please verify your details or contact the admissions office if you believe this is an error.</p>
+                            </div>
+                        </div>
+                    `;
+                }
+            }, 1500);
+        });
+
+        // Allow search on Enter key
+        document.getElementById('studentName').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('searchLetter').click();
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Animation on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.animate__animated');
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+                
+                if (elementPosition < screenPosition) {
+                    const animationClass = element.getAttribute('data-animation');
+                    element.classList.add(animationClass || 'animate__fadeInUp');
+                }
+            });
+        }
+
+        // Initialize animations when page loads
+        window.addEventListener('load', animateOnScroll);
+        window.addEventListener('scroll', animateOnScroll);
+
+        // Form validation for application search
+        function validateSearch() {
+            const appNumber = document.getElementById('applicationNumber').value.trim();
+            const studentName = document.getElementById('studentName').value.trim();
+            
+            if (!appNumber || !studentName) {
+                alert('Please enter both application number and student name');
+                return false;
+            }
+            
+            if (!/^[A-Z0-9-]{8,12}$/.test(appNumber)) {
+                alert('Please enter a valid application number (e.g., SPR-2025-001)');
+                return false;
+            }
+            
+            return true;
+        }
+
+        // Track application progress (simulated)
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check for saved application progress
+            if (localStorage.getItem('applicationProgress')) {
+                const progress = JSON.parse(localStorage.getItem('applicationProgress'));
+                const continueBtn = document.querySelector('.btn-secondary.btn-large');
+                
+                if (progress.step > 1) {
+                    continueBtn.innerHTML = `<i class="fas fa-sign-in-alt"></i> Continue Application (${progress.step}/4)`;
+                }
+            }
         });
     </script>
 </body>
